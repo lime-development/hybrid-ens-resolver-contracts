@@ -1,0 +1,62 @@
+name: Slither Analysis
+
+on:
+  push:
+    branches: [ master, main, develop ]
+    paths:
+      - 'contracts/**'
+      - 'hardhat.config.js'
+      - 'slither.config.json'
+      - '.github/workflows/contracts.yml'
+      - '.github/workflows/slither.yml'
+  pull_request:
+    branches: [ master, main, develop ]
+
+permissions:
+  contents: read
+  statuses: write
+  security-events: write
+  actions: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Run Slither
+        uses: crytic/slither-action@v0.4.2
+        id: slither
+        with:
+          sarif: results.sarif
+          fail-on: high
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY_TEST }} 
+
+      - name: Set status to GitHub Checks (Success)
+        if: ${{ success() }}
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -d '{"state": "success", "context": "Slither Analysis", "description": "Slither analysis passed successfully!"}' \
+          "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}"
+
+      - name: Set status to GitHub Checks (Failure)
+        if: ${{ failure() }}
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -d '{"state": "failure", "context": "Slither Analysis", "description": "Slither analysis failed. Please check the logs!"}' \
+          "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}"
+
+      # Upload SARIF to Code scanning. Requires: Settings → Code security and analysis → Code scanning → Enable.
+      # If Code scanning is disabled, this step is skipped without failing the job (Slither results remain in logs).
+      - name: Upload SARIF file (only on main branch push or PR targeting main)
+        if: |
+          github.event_name == 'push' && github.ref == 'refs/heads/main' ||
+          github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: ${{ steps.slither.outputs.sarif }}
+        continue-on-error: true

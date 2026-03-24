@@ -1,0 +1,19 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "contract": "HybridResolver",
+  "address": "0xcD45eDa10862a76d1C2Db5609620A041D15a87A9",
+  "implementation": "0x775f776BCd547fF6633a316ad488390D5012Bca8",
+  "gatewayURLs": [
+    "https://backend.lime.dev"
+  ],
+  "ccipSigners": [
+    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+  ],
+  "setAddrSigners": [
+    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+  ],
+  "owner": "0x284cc50eb6C93c55BA4963D0dC5097C54db71580",
+  "deployedAt": "2026-02-26T20:08:02.102Z",
+  "deployer": "0x284cc50eb6C93c55BA4963D0dC5097C54db71580"
+}

@@ -1,0 +1,5 @@
+{
+  "exclude_dependencies": true,
+  "filter_paths": "",
+  "detectors_to_exclude": "pragma"
+}

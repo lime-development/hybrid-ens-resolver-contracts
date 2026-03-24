@@ -1,0 +1,19 @@
+{
+  "network": "mainnet",
+  "chainId": 1,
+  "contract": "HybridResolver",
+  "address": "0xaBE3E8dCB19De6ccE1B2A665F915528D9A00CA9C",
+  "implementation": "0x7Db58395f9BF698F6a6804A7F61BB992933c7D84",
+  "gatewayURLs": [
+    "https://backend.lime.dev"
+  ],
+  "ccipSigners": [
+    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+  ],
+  "setAddrSigners": [
+    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+  ],
+  "owner": "0x284cc50eb6C93c55BA4963D0dC5097C54db71580",
+  "deployedAt": "2026-02-26T22:09:49.697Z",
+  "deployer": "0x284cc50eb6C93c55BA4963D0dC5097C54db71580"
+}
