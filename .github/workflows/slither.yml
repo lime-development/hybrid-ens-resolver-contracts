@@ -29,10 +29,9 @@ jobs:
         uses: crytic/slither-action@v0.4.2
         id: slither
         with:
+          node-version: '22'
           sarif: results.sarif
           fail-on: high
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY_TEST }} 
 
       - name: Set status to GitHub Checks (Success)
         if: ${{ success() }}

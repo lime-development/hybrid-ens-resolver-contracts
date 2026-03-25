@@ -83,12 +83,6 @@ npx hardhat compile
 npm test
 ```
 
-| Script | Purpose |
-|--------|---------|
-| `npm test` | All tests under `test/**/*.test.js` (see `.mocharc.json`) |
-| `npm run test:unit` | Tests whose titles **do not** match `Integration` (today this is the full suite) |
-| `npm run test:integration` | Only tests whose titles match `Integration` (add such tests when you ship gateway E2E coverage) |
-
 The main suite is **`test/HybridResolver.test.js`**: deployment, `resolve` / `resolveWithProof`, `setAddr`, CCIP vs setAddr signer management, URLs, and related cases.
 
 ## Configuration
